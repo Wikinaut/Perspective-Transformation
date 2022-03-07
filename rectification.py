@@ -1,9 +1,33 @@
+#!/usr/bin/env python
+
 import os
 import cv2
 from pylsd.lsd import lsd
 import numpy as np
 from scipy.linalg import expm
 import time
+import argparse
+import re
+import sys
+
+# Perspective control
+#
+# original code: https://github.com/dotieuthien/Perspective-Transformation
+
+
+def setup_parser():
+
+    my_parser = argparse.ArgumentParser( prog = re.sub( '.py$', '', sys.argv[0] ),
+        usage = '%(prog)s infile [-i|--iterations] [-l|lr]',
+        description = 'shiftn'
+    )
+
+    my_parser.add_argument('infile', action='store', type=str, help='image input file')
+    my_parser.add_argument('-i','--iterations', default='5',action='store', type=int, help='iterations [default: 5]')
+    my_parser.add_argument('-l','--lr', default='0.1', action='store', type=float, help='lr [default: 0.1]')
+    args = my_parser.parse_args()
+
+    return args
 
 
 # Funcs for paper "rectification of planar targets using line segments"
@@ -312,5 +336,6 @@ def gradient_descent_optimizer(image, max_iters, lr):
 
 
 if __name__ == '__main__':
-    image = cv2.imread('/mnt/data/hades/source/sekiwa_rnd/image_enhancement/test.png')
-    gradient_descent_optimizer(image, 5, 0.1)
+    args = setup_parser()
+    image = cv2.imread(args.infile)
+    gradient_descent_optimizer(image, args.iterations, args.lr)

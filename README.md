@@ -18,11 +18,11 @@ pip install ocrd-fork-pylsd
 ### Result
 #### Image after rendering
 
-<img width="1000" alt="First result" src="./figures/perspective_test.png">
+<img width="1000" alt="First result" src="./img/perspective_test.png">
 
 #### The result after cropping
 
-<img alt="First result" src="./figures/result.png">
+<img alt="First result" src="./img/result.png">
 
 ### Reference
 [Rectification of planar targets using line segments](https://www.semanticscholar.org/paper/Rectification-of-planar-targets-using-line-segments-An-Koo/e1feceb12777c06727da3b281d2b8d7472182444)
