@@ -86,7 +86,7 @@ def cost_function(h, w, f, lines, H1):
     return cost
 
 
-def derivative_componets(h_, w_, f_, theta_, phi_, gamma_, u_, v_):
+def derivative_components(h_, w_, f_, theta_, phi_, gamma_, u_, v_):
     # K matrix for internal paprameter of camera
     K = np.array([[f_, 0, w_ / 2],
                   [0, f_, h_/ 2],
@@ -198,7 +198,7 @@ def gradient(image, lines, f_, theta_, phi_, gamma_):
         weighted = (line[0] - line[2]) ** 2 + (line[1] - line[3]) ** 2
         d = min(abs(u1[0] / u1[2] - v1[0] / v1[2]), abs(u1[1] / u1[2] - v1[1] / v1[2])) ** 2
         # Derivative
-        H1u_theta, H1u_phi, H1u_gamma, H1v_theta, H1v_phi, H1v_gamma = derivative_componets(h_, w_, f_, theta_, phi_, gamma_, u1, v1)
+        H1u_theta, H1u_phi, H1u_gamma, H1v_theta, H1v_phi, H1v_gamma = derivative_components(h_, w_, f_, theta_, phi_, gamma_, u1, v1)
 
         if (abs(u1[0] / u1[2] - v1[0] / v1[2]) <= abs(u1[1] / u1[2] - v1[1] / v1[2])) and (u1[0] / u1[2] > v1[0] / v1[2]):
             dd_H1u = np.array([1 / u1[2], 0, -u1[0] / (u1[2] ** 2)])
